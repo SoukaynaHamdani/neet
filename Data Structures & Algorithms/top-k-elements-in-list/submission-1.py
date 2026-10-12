@@ -2,7 +2,7 @@ import heapq
 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
- 
+    # 1. حساب الترددات
         count_map = {}
         for num in nums:
                 count_map[num] = count_map.get(num, 0) + 1
