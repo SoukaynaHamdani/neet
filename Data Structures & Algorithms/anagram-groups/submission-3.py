@@ -12,8 +12,7 @@ class Solution:
         class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         anagram_map = {}
-
-        # 1. كندورو على الكلمات مباشرة (Pythonic way)
+ 
         for word in strs:
              
              
@@ -23,10 +22,8 @@ class Solution:
             if sorted_word in anagram_map:
                 anagram_map[sorted_word].append(word)
             else:
-                # 4. إلا ماكاينش، كنكرييو مصفوفة جديدة وكنحطو فيها الكلمة
-                anagram_map[sorted_word] = [word]
-
-        # 5. كنرجعو القيم (المجموعات) على شكل مصفوفة ديال المصفوفات
+                
+                anagram_map[sorted_word] = [word]ت
         return list(anagram_map.values())     
           """
 
