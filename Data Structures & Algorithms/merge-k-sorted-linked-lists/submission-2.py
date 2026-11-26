@@ -1,0 +1,76 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+class Solution:         
+    """ start res with a dummyNode Use a priority queue ie minHeap fill it with all the heads ( val , node ) at first and when poping the min add it to res linked list and add its next to the minheap also uodate the temp
+    we add a break tier i so if the values are equal it doesnt compare nodes cuz it is impossible 
+    
+    time (N*K log k) N average number of nodes in  each list  
+    space o(k) """
+ 
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        dummy=ListNode(-1)
+        curr=dummy
+        minHeap=[]
+        #fill the minheap with all heads 
+        for i in range(len(lists)): 
+            head=lists[i]
+            if head:
+                heapq.heappush(minHeap, (head.val,i, head))
+        while minHeap: 
+            val,i ,node=heapq.heappop(minHeap)
+            curr.next=node 
+            curr=node 
+            if node.next: 
+                heapq.heappush(minHeap, (node.next.val ,i, node.next))
+                 
+        return dummy.next
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""    #time comlexity ~m^3 too slow not optimal  gives a tle 
+        if not lists: return None
+        head= lists[0]
+        for i in range(1, len(lists)): 
+            head=self.mergeTwoLists(head,lists[i])
+        return head 
+         
+
+    def mergeTwoLists(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        # in-place (O(1) space   time :O(N + M)  n len of l1 , m len l2 
+        dummy=ListNode()
+        curr1=l1  
+        curr2=l2  
+        curr=dummy 
+
+        while curr1 and curr2: 
+            if curr2.val > curr1.val:
+                curr.next=curr1
+                curr1 =curr1.next
+            else:
+                curr.next=curr2
+                curr2 =curr2.next
+            curr=curr.next
+        
+        if curr1:
+            curr.next=curr1 
+        elif curr2:
+            curr.next=curr2
+             
+        return dummy.next
+
+"""
